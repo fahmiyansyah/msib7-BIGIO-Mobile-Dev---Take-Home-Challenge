@@ -119,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => const FavoriteCharactersScreen()),
+            MaterialPageRoute(builder: (context) => FavoriteCharactersScreen()),
           );
         },
         tooltip: 'Favorite Characters',

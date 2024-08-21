@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import '../data/cubits/characters/fetch_characters_cubit.dart';
 import '../data/cubits/characters/fetch_characters_state.dart';
+import '../data/models/character.dart';
+import '../data/provider/favorite_characters_provider.dart';
 
 class CharacterDetail2Screen extends StatefulWidget {
   final int characterId;
@@ -14,6 +17,13 @@ class CharacterDetail2Screen extends StatefulWidget {
 
 class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
   bool _isFavorite = false;
+  final List<CharactersData> _favoriteCharacters = [];
+  @override
+  void initState() {
+    super.initState();
+    _checkIfFavorite();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,13 +78,26 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                   _isFavorite
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color:
-                                      _isFavorite ? Colors.red : Colors.grey,
+                                  color: _isFavorite ? Colors.red : Colors.grey,
                                 ),
                                 onPressed: () {
-                                  setState(() {
-                                    _isFavorite = !_isFavorite;
-                                  });
+                                  if (!_isFavorite) {
+                                    Provider.of<FavoriteCharactersProvider>(
+                                            context,
+                                            listen: false)
+                                        .addFavoriteCharacter(character);
+                                    setState(() {
+                                      _isFavorite = true;
+                                    });
+                                  } else {
+                                    Provider.of<FavoriteCharactersProvider>(
+                                            context,
+                                            listen: false)
+                                        .removeFavoriteCharacter(character);
+                                    setState(() {
+                                      _isFavorite = false;
+                                    });
+                                  }
                                 },
                               ),
                             ],
@@ -237,5 +260,21 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
         ),
       ],
     );
+  }
+
+  void _checkIfFavorite() {
+    final favoriteProvider =
+        Provider.of<FavoriteCharactersProvider>(context, listen: false);
+    final characterId = widget.characterId;
+    if (favoriteProvider.favoriteCharacters
+        .any((character) => character.id == characterId)) {
+      setState(() {
+        _isFavorite = true;
+      });
+    } else {
+      setState(() {
+        _isFavorite = false;
+      });
+    }
   }
 }

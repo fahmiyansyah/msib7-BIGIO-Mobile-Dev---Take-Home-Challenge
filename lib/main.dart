@@ -1,25 +1,28 @@
 import 'package:bigio_test/data/cubits/characters/fetch_characters_cubit.dart';
 import 'package:bigio_test/data/cubits/detail_character/character_detail_cubit.dart';
+import 'package:bigio_test/data/provider/favorite_characters_provider.dart';
 import 'package:bigio_test/ui/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bigio_test/env/env.dart' as AppEnv;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<FetchCharactersCubit>(
-          create: (context) => FetchCharactersCubit(),
-        ),
-        BlocProvider<CharacterDetailCubit>(
-          create: (context) => CharacterDetailCubit(),
-        ),
-      ],
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<FetchCharactersCubit>(
+        create: (context) => FetchCharactersCubit(),
+      ),
+      BlocProvider<CharacterDetailCubit>(
+        create: (context) => CharacterDetailCubit(),
+      ),
+    ],
+    child: ChangeNotifierProvider(
+      create: (_) => FavoriteCharactersProvider(),
       child: const MyApp(),
     ),
-  );
+  ));
 }
 
 class MyApp extends StatelessWidget {
