@@ -6,6 +6,8 @@ import 'package:bigio_test/ui/character_detail_screen2.dart';
 import '../data/cubits/characters/fetch_characters_state.dart';
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
@@ -76,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
               .read<FetchCharactersCubit>()
               .searchCharacters(_searchController.text);
         },
-        child: Icon(Icons.search),
+        child: const Icon(Icons.search),
       ),
     );
   }

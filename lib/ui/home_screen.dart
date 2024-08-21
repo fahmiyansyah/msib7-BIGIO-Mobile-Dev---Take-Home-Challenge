@@ -1,5 +1,6 @@
 import 'package:bigio_test/data/cubits/characters/fetch_characters_cubit.dart';
 import 'package:bigio_test/ui/character_detail_screen2.dart';
+import 'package:bigio_test/ui/favorite_character_screen.dart';
 import 'package:bigio_test/ui/search_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SearchScreen()),
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
               );
             },
           ),
@@ -98,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
                           ),
-                          
                         ),
                       ],
                     ),
@@ -114,6 +114,20 @@ class _HomeScreenState extends State<HomeScreen> {
             return Container();
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const FavoriteCharactersScreen()),
+          );
+        },
+        tooltip: 'Favorite Characters',
+        child: const Icon(
+          Icons.favorite,
+          color: Colors.red,
+        ),
       ),
     );
   }

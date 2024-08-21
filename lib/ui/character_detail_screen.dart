@@ -22,14 +22,12 @@ class CharacterDetailScreen extends StatelessWidget {
           } else if (state is CharacterDetailSuccess) {
             return Column(
               children: [
-                // Image
                 Container(
                   height: 200,
                   color: Colors.amber,
                   width: double.infinity,
                   child: Image.network(state.character.image),
                 ),
-                // Detail
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
