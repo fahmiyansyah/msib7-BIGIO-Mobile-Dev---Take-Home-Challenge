@@ -1,7 +1,6 @@
 import 'package:bigio_test/ui/character_detail_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../data/provider/favorite_characters_provider.dart';
 
 class FavoriteCharactersScreen extends StatefulWidget {
@@ -17,7 +16,10 @@ class _FavoriteCharactersScreenState extends State<FavoriteCharactersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite Characters'),
+        title: const Text(
+          'Favorite Characters',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Consumer<FavoriteCharactersProvider>(
