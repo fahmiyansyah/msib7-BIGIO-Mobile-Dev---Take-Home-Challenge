@@ -23,7 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rick and Mort'),
+        title: const Text(
+          'Rick and Mort',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.search),

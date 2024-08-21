@@ -10,7 +10,6 @@ import 'package:bigio_test/utils/constants.dart' as AppConst;
 
 class ApiProvider {
   final String _baseUrl = AppConst.API_URL;
-  // Map<String, String> headers = {"Content-type": "application/json"};
 
   Future<dynamic> get(dynamic url, {Map<String, String>? headers}) async {
     var responseJson;
