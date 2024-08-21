@@ -70,33 +70,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                  child: GridTile(
-                    child: Card(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 180,
-                            width: 180,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FadeInImage(
-                                  placeholder: const AssetImage(
-                                    "assets/images/fa16514fbec646d08f51e1bd5fdc6ab5.gif",
-                                  ),
-                                  image: NetworkImage(
-                                      state.character[index].image),
-                                  fadeOutDuration:
-                                      const Duration(milliseconds: 700),
-                                  fit: BoxFit.fill),
-                            ),
+                  child: Card(
+                    color: Colors.grey[200],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 170,
+                          width: 190,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: FadeInImage(
+                                placeholder: const AssetImage(
+                                  "assets/images/fa16514fbec646d08f51e1bd5fdc6ab5.gif",
+                                ),
+                                image:
+                                    NetworkImage(state.character[index].image),
+                                fadeOutDuration:
+                                    const Duration(milliseconds: 700),
+                                fit: BoxFit.fill),
                           ),
-                          const SizedBox(
-                            height: 5,
+                        ),
+                        Text(
+                          state.character[index].name,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
                           ),
-                          Text(state.character[index].name,
-                              style: const TextStyle(fontSize: 15)),
-                        ],
-                      ),
+                          
+                        ),
+                      ],
                     ),
                   ),
                 );

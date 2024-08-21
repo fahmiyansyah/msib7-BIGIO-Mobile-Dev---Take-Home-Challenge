@@ -1,4 +1,4 @@
-name: Rick and Morty App
+name: bigio_test
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -39,7 +39,7 @@ dependencies:
   bloc: ^8.1.4
   equatable: ^2.0.5
   flutter_bloc: ^8.1.6
-  url_launcher: ^6.2.4
+
 
 dev_dependencies:
   flutter_test:

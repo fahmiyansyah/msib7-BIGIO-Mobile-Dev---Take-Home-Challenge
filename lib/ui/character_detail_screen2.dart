@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/cubits/characters/fetch_characters_cubit.dart';
 import '../data/cubits/characters/fetch_characters_state.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CharacterDetail2Screen extends StatefulWidget {
   final int characterId;
@@ -16,9 +15,6 @@ class CharacterDetail2Screen extends StatefulWidget {
 class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
   @override
   Widget build(BuildContext context) {
-    bool _isOriginPressed = false;
-    bool _isLocationPressed = false;
-    bool _isEpisodePressed = false;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -115,95 +111,9 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Origin: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTapDown: (details) {
-                                    setState(() {
-                                      _isOriginPressed = true;
-                                    });
-                                  },
-                                  onTapUp: (details) {
-                                    setState(() {
-                                      _isOriginPressed = false;
-                                    });
-                                  },
-                                  onTap: () async {
-                                    final url = character.origin.url;
-                                    if (await canLaunchUrl(Uri.parse(url))) {
-                                      await launchUrl(Uri.parse(url));
-                                    } else {
-                                      throw 'Could not launch $url';
-                                    }
-                                  },
-                                  child: Text(
-                                    character.origin.name,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: _isOriginPressed
-                                          ? Colors.blue.withOpacity(0.5)
-                                          : Colors.blue,
-                                      decoration: _isOriginPressed
-                                          ? TextDecoration.underline
-                                          : null,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Location: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTapDown: (details) {
-                                    setState(() {
-                                      _isLocationPressed = true;
-                                    });
-                                  },
-                                  onTapUp: (details) {
-                                    setState(() {
-                                      _isLocationPressed = false;
-                                    });
-                                  },
-                                  onTap: () async {
-                                    final url = character.location.url;
-                                    if (await canLaunchUrl(Uri.parse(url))) {
-                                      await launchUrl(Uri.parse(url));
-                                    } else {
-                                      throw 'Could not launch $url';
-                                    }
-                                  },
-                                  child: Text(
-                                    character.location.name,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: _isOriginPressed
-                                          ? Colors.blue.withOpacity(0.5)
-                                          : Colors.blue,
-                                      decoration: _isOriginPressed
-                                          ? TextDecoration.underline
-                                          : null,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            text('Origin: ', character.origin.name),
+                            const SizedBox(height: 3),
+                            text('Location: ', character.location.name),
                             const SizedBox(height: 10),
                             const Center(
                               child: Text(
@@ -215,43 +125,34 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTapDown: (details) {
-                                setState(() {
-                                  _isEpisodePressed = true;
-                                });
-                              },
-                              onTapUp: (details) {
-                                setState(() {
-                                  _isEpisodePressed = false;
-                                });
-                              },
-                              onTap: () async {
-                                for (var episodeUrl in character.episode) {
-                                  if (await canLaunchUrl(
-                                      Uri.parse(episodeUrl))) {
-                                    await launchUrl(Uri.parse(episodeUrl));
-                                  } else {
-                                    throw 'Could not launch $episodeUrl';
-                                  }
-                                }
-                              },
-                              child: Text(
-                                character.episode
-                                    .map((episodeUrl) =>
-                                        'Episode ${episodeUrl.split('/').last}')
-                                    .join(', '),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: _isEpisodePressed
-                                      ? Colors.blue.withOpacity(0.5)
-                                      : Colors.blue,
-                                  decoration: _isEpisodePressed
-                                      ? TextDecoration.underline
-                                      : null,
+                            Center(
+                              child: InkWell(
+                                child: Wrap(
+                                  spacing: 15,
+                                  children: character.episode.map((episodeUrl) {
+                                    return SizedBox(
+                                      height: 40,
+                                      width: 110,
+                                      child: Card(
+                                        color:
+                                            Colors.white.withOpacity(0.2),
+                                        child: Center(
+                                          child: Text(
+                                            'Episode ${episodeUrl.split('/').last}',
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.blue,
+                                              decoration: TextDecoration
+                                                  .underline,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -294,6 +195,29 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget text(String headText, String data) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          headText,
+          style: const TextStyle(
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 144, 95, 228),
+          ),
+        ),
+        Text(
+          data,
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.blue,
+          ),
+        ),
+      ],
     );
   }
 }

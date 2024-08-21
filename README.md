@@ -33,7 +33,6 @@ In this project I want to use different pinch on character detail. But I found a
 - Bloc
 - Equatable
 - Flutter Bloc
-- URL Launcher
 - Flutter Test
 - Flutter Lints
 
