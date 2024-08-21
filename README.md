@@ -63,4 +63,8 @@ Directories
 
 # APK Link
 
+https://drive.google.com/drive/folders/1T4kGzlYghvh8CchvSUeC-_bIvmrBqODT?usp=sharing
+
 # Github Link
+
+https://github.com/fahmiyansyah/msib7-BIGIO-Mobile-Dev---Take-Home-Challenge
