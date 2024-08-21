@@ -5,7 +5,7 @@ package="com.takehomechallenge.ardiansyah">
     <application
         android:label="bigio_test"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/rick_and_mort_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
