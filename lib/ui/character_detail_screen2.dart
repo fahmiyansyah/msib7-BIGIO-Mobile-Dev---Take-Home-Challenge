@@ -13,6 +13,7 @@ class CharacterDetail2Screen extends StatefulWidget {
 }
 
 class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
+  bool _isFavorite = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +52,32 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                 const BorderRadius.all(Radius.circular(10)),
                           ),
                           height: 50,
-                          child: Center(
-                            child: Text(
-                              character.name,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                          width: double.infinity,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                character.name,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                              IconButton(
+                                icon: Icon(
+                                  _isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color:
+                                      _isFavorite ? Colors.red : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isFavorite = !_isFavorite;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -134,16 +153,15 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                       height: 40,
                                       width: 110,
                                       child: Card(
-                                        color:
-                                            Colors.white.withOpacity(0.2),
+                                        color: Colors.white.withOpacity(0.2),
                                         child: Center(
                                           child: Text(
                                             'Episode ${episodeUrl.split('/').last}',
                                             style: const TextStyle(
                                               fontSize: 18,
                                               color: Colors.blue,
-                                              decoration: TextDecoration
-                                                  .underline,
+                                              decoration:
+                                                  TextDecoration.underline,
                                             ),
                                           ),
                                         ),
