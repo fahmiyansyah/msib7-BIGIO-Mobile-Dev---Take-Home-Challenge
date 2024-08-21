@@ -24,7 +24,7 @@ This project is a MSIB batch 7 test at BIGIO Company which contains a mobile app
 
 # Probleam
 
-In this project I want to use different pinch on character detail. But I found a problem that I can't solve about the difference in datatype that I never found where the problem is. So I use another method but still leave the previous method code as a reference and improvement.
+In this project I want to use different pinch on character detail. But I found a problem that I can't solve about the difference in datatype that I never found where the problem is. So I use another method but still leave the previous method code as a reference and improvement. Apart from that, the favorite feature only works temporarily because it is not yet connected to the database.
 
 # Libraries
 
