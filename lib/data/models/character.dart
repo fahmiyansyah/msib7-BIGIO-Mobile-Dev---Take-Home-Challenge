@@ -1,59 +1,46 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class CharacterGeneralResponse {
-  CharacterGeneralResponse({
-    required this.data,
-    required this.message,
-    required this.status,
-  });
+  Info info;
+  List<CharactersData> results;
 
-  List<CharacterData> data;
-  String message;
-  String status;
+  CharacterGeneralResponse({required this.info, required this.results});
 
-  factory CharacterGeneralResponse.fromJson(Map<String, dynamic> json) =>
-      CharacterGeneralResponse(
-        data: List<CharacterData>.from(
-            json["data"].map((x) => CharacterData.fromJson(x))),
-        message: json["message"],
-        status: json["status"],
-      );
-
-  @override
-  String toString() {
-    return 'Character{data: $data}';
+  factory CharacterGeneralResponse.fromJson(Map<String, dynamic> json) {
+    return CharacterGeneralResponse(
+      info: Info.fromJson(json['info']),
+      results: json['results'] != null
+          ? (json['results'] as List)
+              .map((item) => CharactersData.fromJson(item))
+              .toList()
+          : [],
+    );
   }
 }
 
-// class CharacterDetailResponse {
-//   CharacterDetailResponse({
-//     required this.status,
-//     required this.message,
-//     required this.data,
-//   });
+class CharacterDetailResponse {
+  CharacterDetailResponse({
+    this.message,
+    required this.data,
+  });
 
-//   final String status;
-//   final String message;
-//   final CharacterData data;
+  final String? message;
+  final CharactersData data;
 
-//   factory CharacterDetailResponse.fromJson(Map<String, dynamic> json) =>
-//       CharacterDetailResponse(
-//         status: json["status"],
-//         message: json["message"],
-//         data:
-//             json["data"] == null ? null : CharacterData.fromJson(json["data"]),
-//       );
+  factory CharacterDetailResponse.fromJson(Map<String, dynamic> json) =>
+      CharacterDetailResponse(
+        message: jsonDecode(json["message"]) ?? '',
+        data: CharactersData.fromJson(json["data"]),
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "status": status,
-//         "message": message,
-//         "data": data.toJson(),
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "data": data.toJson(),
+      };
+}
 
-class CharacterData {
-  CharacterData({
+class CharactersData {
+  CharactersData({
     required this.id,
     required this.name,
     required this.status,
@@ -74,26 +61,30 @@ class CharacterData {
   String species;
   String type;
   String gender;
-  CharacterLocation origin;
+  Origin origin;
   CharacterLocation location;
   String image;
   List<String> episode;
   String url;
   DateTime created;
 
-  factory CharacterData.fromJson(Map<String, dynamic> json) => CharacterData(
-        id: json["id"],
-        name: json["name"],
-        status: json["status"],
-        species: json["species"],
-        type: json["type"],
-        gender: json["gender"],
-        origin: CharacterLocation.fromJson(json["origin"]),
-        location: CharacterLocation.fromJson(json["location"]),
-        image: json["image"],
-        episode: List<String>.from(json["episode"].map((x) => x)),
-        url: json["url"],
-        created: DateTime.parse(json["created"]),
+  factory CharactersData.fromJson(Map<String, dynamic> json) => CharactersData(
+        id: json['id'],
+        name: json['name'] ?? '-',
+        status: json['status'] ?? '-',
+        species: json['species'] ?? '-',
+        type: json['type'] ?? '-',
+        gender: json['gender'] ?? '',
+        origin: Origin.fromJson(json["origin"] ?? {}),
+        location: CharacterLocation.fromJson(json["location"] ?? {}),
+        image: json["image"] ?? '',
+        episode: json["episode"] != null
+            ? List<String>.from(json["episode"].map((x) => x))
+            : [''],
+        url: json["url"] ?? '',
+        created: json["created"] != null
+            ? DateTime.parse(json["created"])
+            : DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -106,9 +97,29 @@ class CharacterData {
         "origin": origin.toJson(),
         "location": location.toJson(),
         "image": image,
-        "episode": List<dynamic>.from(episode.map((x) => x)),
+        "episode": List<String>.from(episode.map((x) => x)),
         "url": url,
         "created": created.toIso8601String(),
+      };
+}
+
+class Origin {
+  Origin({
+    required this.name,
+    required this.url,
+  });
+
+  String name;
+  String url;
+
+  factory Origin.fromJson(Map<String, dynamic> json) => Origin(
+        name: json['name'] ?? '',
+        url: json['url'] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "url": url,
       };
 }
 
@@ -123,12 +134,34 @@ class CharacterLocation {
 
   factory CharacterLocation.fromJson(Map<String, dynamic> json) =>
       CharacterLocation(
-        name: json["name"],
-        url: json["url"],
+        name: json['name'] ?? '',
+        url: json['url'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "url": url,
       };
+}
+
+class Info {
+  int count;
+  int pages;
+  String next;
+  String? prev;
+
+  Info(
+      {required this.count,
+      required this.pages,
+      required this.next,
+      required this.prev});
+
+  factory Info.fromJson(Map<String, dynamic> json) {
+    return Info(
+      count: json['count'],
+      pages: json['pages'],
+      next: json['next'],
+      prev: json['prev'],
+    );
+  }
 }

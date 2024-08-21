@@ -1,26 +1,45 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bigio_test/api/api.dart';
 import 'package:bigio_test/data/models/character.dart';
-import 'package:bigio_test/utils/constants.dart' as AppConst;
 
-class CharacterRepository {
+class CharactersRepository {
   final ApiProvider _provider = ApiProvider();
 
   Future<CharacterGeneralResponse> fetchAllChar() async {
-    final response = await _provider.get('/character', headers: {});
+    final response = await _provider.get('/character/');
+    int pages = (response['info']['pages'] ?? 1);
 
-    Map<String, dynamic> data = {"data": response};
+    List<CharactersData> allCharacters = [];
 
-    return CharacterGeneralResponse.fromJson(data);
+    for (int i = 1; i <= pages; i++) {
+      final responsePage = await _provider.get('/character/?page=$i');
+      allCharacters.addAll(responsePage['results']
+          .map<CharactersData>((item) => CharactersData.fromJson(item)));
+    }
+
+    return CharacterGeneralResponse(
+      info: Info.fromJson(response['info']),
+      results: allCharacters,
+    );
   }
 
-  Future<CharacterGeneralResponse> getChar() async {
-    final response = await _provider.get('/character/2', headers: {
-      HttpHeaders.contentTypeHeader: 'text/plain',
-    });
+  Future<CharacterDetailResponse> getChar({required int id}) async {
+    final response = await _provider.get('/character/$id');
 
-    return CharacterGeneralResponse.fromJson(response);
+    if (response != null) {
+      return CharacterDetailResponse.fromJson(response);
+    } else {
+      throw Exception('Failed to load characters data');
+    }
+  }
+
+  Future<CharacterGeneralResponse> searchCharacters(
+      {required String name}) async {
+    final response = await _provider.get('/character/?name=$name');
+
+    if (response != null) {
+      return CharacterGeneralResponse.fromJson(response);
+    } else {
+      throw Exception('Failed to load characters data');
+    }
   }
 }

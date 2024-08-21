@@ -1,16 +1,30 @@
+import 'package:bigio_test/data/cubits/characters/fetch_characters_cubit.dart';
+import 'package:bigio_test/data/cubits/detail_character/character_detail_cubit.dart';
 import 'package:bigio_test/ui/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bigio_test/env/env.dart' as AppEnv;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<FetchCharactersCubit>(
+          create: (context) => FetchCharactersCubit(),
+        ),
+        BlocProvider<CharacterDetailCubit>(
+          create: (context) => CharacterDetailCubit(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
