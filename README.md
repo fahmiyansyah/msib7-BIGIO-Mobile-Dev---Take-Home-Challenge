@@ -1,16 +1,66 @@
-# bigio_test
+# Rick and Morty Character App
 
-A new Flutter project.
+# Introduction
 
-## Getting Started
+This project is a MSIB batch 7 test at BIGIO Company which contains a mobile application that allows users to browse and search for characters from the popular TV show Rick and Morty. The application uses the Rick and Morty API to retrieve character data and display it in an easy-to-use interface.
 
-This project is a starting point for a Flutter application.
+# Table of Content
 
-A few resources to get you started if this is your first Flutter project:
+> Introduction
+> Features
+> Problem
+> Libraries
+> Project Structure
+> Apk Link
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> List of Character
+> Detail Character
+> Search Character
+
+# Probleam
+
+In this project I want to use different pinch on character detail. But I found a problem that I can't solve about the difference in datatype that I never found where the problem is. So I use another method but still leave the previous method code as a reference and improvement.
+
+# Libraries
+
+- Flutter
+- Cupertino Icons
+- HTTP
+- Meta
+- Bloc
+- Equatable
+- Flutter Bloc
+- URL Launcher
+- Flutter Test
+- Flutter Lints
+
+# Project Structure
+
+Directories
+
+> android/
+> build/
+> ios/
+> lib/
+> linux/
+> macos/
+> test/
+> web/
+> windows/
+> assets/
+> Subdirectories
+> lib/
+> api/
+> data/
+> cubits/
+> models/
+> repositories/
+> env/
+> main.dart
+> ui/
+> utils/
+> assets
+
+# APK Link
