@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import '../data/cubits/characters/fetch_characters_cubit.dart';
 import '../data/cubits/characters/fetch_characters_state.dart';
-import '../data/models/character.dart';
 import '../data/provider/favorite_characters_provider.dart';
 
 class CharacterDetail2Screen extends StatefulWidget {
@@ -17,7 +16,6 @@ class CharacterDetail2Screen extends StatefulWidget {
 
 class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
   bool _isFavorite = false;
-  final List<CharactersData> _favoriteCharacters = [];
   @override
   void initState() {
     super.initState();
@@ -33,7 +31,7 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
         elevation: 0,
       ),
       body: Container(
-        color: const Color.fromARGB(255, 44, 22, 82),
+        color: Color.fromARGB(255, 5, 67, 30),
         child: BlocBuilder<FetchCharactersCubit, FetchCharactersState>(
           builder: (context, state) {
             if (state is FetchCharactersSuccess) {
@@ -130,7 +128,7 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                     style: TextStyle(
                                       fontSize: 19,
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 107, 60, 188),
+                                      color: Color.fromARGB(255, 9, 75, 9),
                                     ),
                                   ),
                                   Text(
@@ -163,7 +161,7 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                 style: TextStyle(
                                   fontSize: 19,
                                   fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 144, 95, 228),
+                                  color: Color.fromARGB(255, 109, 221, 81),
                                 ),
                               ),
                             ),
@@ -223,7 +221,7 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
               style: const TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 107, 60, 188),
+                color: Color.fromARGB(255, 9, 75, 9),
               ),
             ),
             Text(
@@ -248,7 +246,7 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
           style: const TextStyle(
             fontSize: 19,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 144, 95, 228),
+            color: Color.fromARGB(255, 109, 221, 81),
           ),
         ),
         Text(

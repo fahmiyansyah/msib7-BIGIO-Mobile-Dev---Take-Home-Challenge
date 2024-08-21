@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Rick and Mort',
+          'Rick and Morty',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

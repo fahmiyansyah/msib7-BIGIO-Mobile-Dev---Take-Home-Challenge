@@ -19,6 +19,8 @@ This project is a MSIB batch 7 test at BIGIO Company which contains a mobile app
 - List of Character
 - Detail Character
 - Search Character
+- Favorite List 
+- Add and Delete Favorite Character Temporary
 
 # Probleam
 
@@ -35,6 +37,7 @@ In this project I want to use different pinch on character detail. But I found a
 - Flutter Bloc
 - Flutter Test
 - Flutter Lints
+- Provider
 
 # Project Structure
 
@@ -47,6 +50,7 @@ Directories
 - lib/
   - api/
   - data/
+    - providers/
     - cubits/
     - models/
     - repositories/
