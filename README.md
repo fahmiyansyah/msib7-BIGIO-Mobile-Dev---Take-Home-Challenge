@@ -6,18 +6,19 @@ This project is a MSIB batch 7 test at BIGIO Company which contains a mobile app
 
 # Table of Content
 
-> Introduction
-> Features
-> Problem
-> Libraries
-> Project Structure
-> Apk Link
+- Introduction
+- Features
+- Problem
+- Libraries
+- Project Structure
+- Apk Link
+- Github Link
 
 # Features
 
-> List of Character
-> Detail Character
-> Search Character
+- List of Character
+- Detail Character
+- Search Character
 
 # Probleam
 
@@ -40,27 +41,26 @@ In this project I want to use different pinch on character detail. But I found a
 
 Directories
 
-> android/
-> build/
-> ios/
-> lib/
-> linux/
-> macos/
-> test/
-> web/
-> windows/
-> assets/
-> Subdirectories
-> lib/
-> api/
-> data/
-> cubits/
-> models/
-> repositories/
-> env/
-> main.dart
-> ui/
-> utils/
-> assets
+- android/
+- assets/
+- build/
+- ios/
+- lib/
+  - api/
+  - data/
+    - cubits/
+    - models/
+    - repositories/
+  - env/
+  - ui/
+  - utils/
+  - main.dart
+- linux/
+- macos/
+- test/
+- web/
+- windows/
 
 # APK Link
+
+# Github Link
