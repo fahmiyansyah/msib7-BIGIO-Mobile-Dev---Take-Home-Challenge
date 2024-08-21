@@ -40,7 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) {
           if (state is FetchCharactersLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  Text("Just Wait a Second")
+                ],
+              ),
             );
           } else if (state is FetchCharactersSuccess) {
             return GridView.builder(
@@ -69,10 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 180,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Image(
-                                image:
-                                    NetworkImage(state.character[index].image),
-                              ),
+                              child: FadeInImage(
+                                  placeholder: const AssetImage(
+                                    "assets/images/fa16514fbec646d08f51e1bd5fdc6ab5.gif",
+                                  ),
+                                  image: NetworkImage(
+                                      state.character[index].image),
+                                  fadeOutDuration:
+                                      const Duration(milliseconds: 700),
+                                  fit: BoxFit.fill),
                             ),
                           ),
                           const SizedBox(

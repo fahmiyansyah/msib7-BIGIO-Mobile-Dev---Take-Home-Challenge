@@ -54,7 +54,6 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
                           ),
-                          width: 350,
                           height: 50,
                           child: Center(
                             child: Text(
@@ -77,104 +76,42 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  'Name: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
+                            const SizedBox(height: 8),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.5),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                              ),
+                              height: 50,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Species: ',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 107, 60, 188),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  character.name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
+                                  Text(
+                                    character.species,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 8),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  'Status: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                Text(
-                                  character.status,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Species: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                Text(
-                                  character.species,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                Text(
-                                  'Type: ${character.type.replaceAll(" ", "-")}',
-                                  style: const TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                Text(
-                                  character.type.replaceAll(" ", "-"),
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Gender: ',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 144, 95, 228),
-                                  ),
-                                ),
-                                Text(
-                                  character.gender,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                cardData('Status: ', character.status),
+                                cardData('Type: ', character.type),
+                                cardData('Gender: ', character.gender),
                               ],
                             ),
                             const SizedBox(height: 8),
@@ -267,13 +204,15 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Episode: ',
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 144, 95, 228),
+                            const SizedBox(height: 10),
+                            const Center(
+                              child: Text(
+                                'Episode: ',
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 144, 95, 228),
+                                ),
                               ),
                             ),
                             InkWell(
@@ -324,6 +263,35 @@ class _CharacterDetail2ScreenState extends State<CharacterDetail2Screen> {
               return const Center(child: CircularProgressIndicator());
             }
           },
+        ),
+      ),
+    );
+  }
+
+  Widget cardData(String headText, String data) {
+    return Expanded(
+      child: Card(
+        color: Colors.white.withOpacity(0.5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              headText,
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 107, 60, 188),
+              ),
+            ),
+            Text(
+              data,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );
